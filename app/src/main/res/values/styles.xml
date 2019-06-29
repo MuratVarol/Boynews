@@ -8,4 +8,19 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="tv_base">
+
+    </style>
+
+    <style name="big_blue" parent="tv_base">
+        <item name="android:textColor">@color/skyBlue</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
+    </style>
+
+    <style name="small_black" parent="tv_base">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/description_text_size</item>
+    </style>
+
 </resources>
