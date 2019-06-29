@@ -10,5 +10,9 @@ data class SourceModel(
     val id: Int?,
 
     @SerializedName("name")
-    val name: Int?
+    val name: String?,
+
+    @SerializedName("description")
+    val description: String?
+
 ) : Parcelable
