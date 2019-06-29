@@ -1,0 +1,14 @@
+<resources>
+
+    <!--MARGINS-->
+    <dimen name="margin_tiny">2dp</dimen>
+    <dimen name="margin_half">4dp</dimen>
+    <dimen name="margin_normal">8dp</dimen>
+    <dimen name="margin_big">12dp</dimen>
+    <dimen name="margin_bigger">16dp</dimen>
+    <dimen name="margin_biggest">20dp</dimen>
+    <dimen name="margin_super">50dp</dimen>
+    <dimen name="margin_super_dupper">100dp</dimen>
+
+
+</resources>
