@@ -11,7 +11,7 @@ interface Api {
     @POST("/v2/sources")
     fun getSources(
         @Query(value = "apiKey") apiKey: String
-    ): Single<BaseResponse<SourceModel>>
+    ): Single<BaseResponse<MutableList<SourceModel>>>
 
     @POST("v2/top-headlines")
     fun getTopHeadLines(

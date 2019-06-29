@@ -9,9 +9,9 @@ import com.varol.boynews.remote.BaseResponse
 import com.varol.boynews.remote.DataHolder
 import io.reactivex.Single
 
-class NewsRepository(val api: Api) : BaseRepository() {
+class NewsRepository(private val api: Api) : BaseRepository() {
 
-    fun getSources(apiKey: String): Single<DataHolder<BaseResponse<SourceModel>>> {
+    fun getSources(apiKey: String): Single<DataHolder<BaseResponse<MutableList<SourceModel>>>> {
         return service.sendRequest(
             api.getSources(apiKey)
         )
