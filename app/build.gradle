@@ -11,7 +11,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.varol.movier"
+        applicationId buildConfig.applicationId
         minSdkVersion buildConfig.minSdk
         targetSdkVersion buildConfig.minSdk
         versionCode generateVersionCode()
@@ -70,7 +70,7 @@ dependencies {
     debugImplementation deps.chuckOkHttp.debug
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-beta01'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 }
