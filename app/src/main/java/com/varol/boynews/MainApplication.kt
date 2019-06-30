@@ -1,10 +1,7 @@
 package com.varol.boynews
 
 import android.app.Application
-import com.varol.boynews.di.appModule
-import com.varol.boynews.di.networkModule
-import com.varol.boynews.di.useCaseModule
-import com.varol.boynews.di.viewModelModule
+import com.varol.boynews.di.*
 import org.koin.android.ext.android.startKoin
 
 class MainApplication : Application() {
@@ -21,7 +18,8 @@ class MainApplication : Application() {
                 appModule,
                 networkModule,
                 useCaseModule,
-                viewModelModule
+                viewModelModule,
+                repositoryModule
             )
         )
     }
