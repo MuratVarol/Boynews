@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.readystatesoftware.chuck.ChuckInterceptor
 import com.varol.boynews.BASE_LINK
+import com.varol.boynews.R
 import com.varol.boynews.remote.Api
 import com.varol.boynews.util.network.CacheInterceptor
 import io.reactivex.schedulers.Schedulers
@@ -28,12 +29,17 @@ val networkModule = module {
     single { createChuckInterceptor(androidContext()) }
     single { createCacheInterceptor() }
     single(name = "baseUrl") { getBaseUrl() }
+    single(name = "apiKey") { getApiKey(androidContext()) }
     single { createOkHttpClient(get(), get(), get()) }
     single { createGson() }
     single { createWebService<Api>(get(), get(), get(name = "baseUrl")) }
 
 }
 
+/**
+ * Return API key
+ */
+fun getApiKey(context: Context): String = context.resources.getString(R.string.API_KEY)
 
 /**
  * Create Cache object for OkHttp instance
@@ -102,7 +108,11 @@ fun getBaseUrl(): String {
  * We can use generics and reflection so ->
  *  we don't have to define required Api Interface here
  */
-inline fun <reified T> createWebService(okHttpClient: OkHttpClient, gson: Gson, baseUrl: String): T {
+inline fun <reified T> createWebService(
+    okHttpClient: OkHttpClient,
+    gson: Gson,
+    baseUrl: String
+): T {
     val retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient)

@@ -6,6 +6,6 @@ import org.koin.dsl.module.Module
 import org.koin.dsl.module.module
 
 val useCaseModule: Module = module {
-    single { GetSourcesUseCase(get(), get()) }
-    single { GetNewsUseCase(get(), get()) }
+    single { GetSourcesUseCase(get(), get(name = "apiKey")) }
+    single { GetNewsUseCase(get(), get(name = "apiKey")) }
 }
