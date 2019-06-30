@@ -3,7 +3,7 @@ package com.varol.boynews.remote
 import com.google.gson.annotations.SerializedName
 
 
-data class BaseResponse<T>(
+data class BaseNewsResponse<T>(
 
     @SerializedName("status")
     val status: String?,
