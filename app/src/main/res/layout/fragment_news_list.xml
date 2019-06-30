@@ -18,14 +18,33 @@
         android:orientation="vertical">
 
 
+        <View
+            android:id="@+id/viewToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/white_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.selectedSource.name}"
+            app:layout_constraintBottom_toBottomOf="@+id/viewToolBar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Kaynaklar" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_news"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/margin_half"
             android:layout_marginEnd="@dimen/margin_half"
             android:layout_marginBottom="@dimen/margin_big"
-            app:dividerDrawableId="@{@drawable/line_transparent}"
             app:itemClickListener="@{viewModel.newsClickListener}"
             app:itemLayoutId="@{@layout/item_news_list}"
             app:itemList="@{viewModel.newsList}"
@@ -33,7 +52,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewToolBar"
             tools:listitem="@layout/item_news_list">
 
         </androidx.recyclerview.widget.RecyclerView>
