@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface Api {
 
-    @GET("/v2/sources")
+    @GET("v2/sources")
     fun getSources(
         @Query(value = "apiKey") apiKey: String
     ): Single<BaseSourceResponse<MutableList<SourceModel>>>
