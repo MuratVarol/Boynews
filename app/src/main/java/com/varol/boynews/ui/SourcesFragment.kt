@@ -35,10 +35,10 @@ class SourcesFragment : BaseFragment<NewsVM, FragmentSourcesListBinding>(NewsVM:
      */
     private fun subscribeSelectedSource() {
         viewModel.selectedSource.observe(this) { sourceModel ->
-            sourceModel?.id?.let {
+            sourceModel?.let { sourceModel ->
                 loadFragment(
                     R.id.container_main,
-                    NewsFragment.newInstance(it),
+                    NewsFragment.newInstance(sourceModel),
                     fragmentManager,
                     true
                 )

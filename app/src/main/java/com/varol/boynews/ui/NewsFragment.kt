@@ -1,5 +1,7 @@
 package com.varol.boynews.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +10,10 @@ import com.varol.boynews.R
 import com.varol.boynews.base.BaseFragment
 import com.varol.boynews.databinding.FragmentNewsListBinding
 import com.varol.boynews.extension.informToast
+import com.varol.boynews.models.SourceModel
 import com.varol.boynews.viewmodel.NewsVM
 import observe
+
 
 class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class) {
     override val getLayoutId: Int = R.layout.fragment_news_list
@@ -24,9 +28,9 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
          * @param id : Source id
          * @return NewFragment
          */
-        fun newInstance(id: String): NewsFragment {
+        fun newInstance(sourceModel: SourceModel): NewsFragment {
             val args = Bundle()
-            args.putString(KEY_SOURCE_ID, id)
+            args.putParcelable(KEY_SOURCE_ID, sourceModel)
             val fragment = NewsFragment()
             fragment.arguments = args
             return fragment
@@ -42,10 +46,26 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
         super.onCreateView(inflater, container, savedInstanceState)
 
         //Call getAllNews method if source is not null
-        getSelectedSource()?.let {
-            viewModel.getAllNews(it)
+        getSelectedSource()?.let { sourceModel ->
+
+            viewModel.selectedSource.postValue(sourceModel)
+
+            sourceModel.id?.let { sourceId ->
+                viewModel.getAllNews(sourceId)
+            }
+
         } ?: run {
             informToast("Invalid News Source!")
+        }
+
+        subscribeSelectedNews()
+
+        binding.ivBack?.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
+        binding.ivBack?.setOnClickListener {
+            activity?.onBackPressed()
         }
 
         return binding.root
@@ -53,10 +73,16 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
 
     private fun subscribeSelectedNews() {
         viewModel.selectedNews.observe(this) {
+            it?.urlAsId?.let { url ->
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                startActivity(browserIntent)
+            } ?: run {
+                informToast("Invalid URL!")
+            }
 
         }
     }
 
-    private fun getSelectedSource(): String? =
-        arguments?.getString(KEY_SOURCE_ID)
+    private fun getSelectedSource(): SourceModel? =
+        arguments?.getParcelable(KEY_SOURCE_ID)
 }
