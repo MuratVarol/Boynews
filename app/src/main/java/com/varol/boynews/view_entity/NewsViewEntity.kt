@@ -1,5 +1,8 @@
 package com.varol.boynews.view_entity
 
+/**
+ * View entity for listing news
+ */
 data class NewsViewEntity(
 
     val urlAsId: String?,
