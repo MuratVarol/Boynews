@@ -50,7 +50,7 @@ abstract class BaseActivity<out VM : ViewModel, DB : ViewDataBinding>(viewModelC
         if (addToBackStack) {
             fragmentTransaction.addToBackStack("")
         }
-        fragmentTransaction.replace(containerId, fragment).commit()
+        fragmentTransaction.add(containerId, fragment).commit()
     }
 
 }

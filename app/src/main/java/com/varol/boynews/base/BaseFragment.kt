@@ -25,7 +25,7 @@ import kotlin.reflect.KClass
 abstract class BaseFragment<out VM : ViewModel, DB : ViewDataBinding>(viewModelClass: KClass<VM>) : Fragment() {
 
     /**
-     * ViewModel injector of Koin.
+     * ViewModel injector
      * no need for ViewModelProviders
      */
     val viewModel: VM by viewModelByClass(viewModelClass)
@@ -63,7 +63,7 @@ abstract class BaseFragment<out VM : ViewModel, DB : ViewDataBinding>(viewModelC
         if (addToBackStack) {
             ft?.addToBackStack("")
         }
-        ft?.replace(containerId, fragment)?.commit()
+        ft?.add(containerId, fragment)?.commit()
     }
 
     /**
