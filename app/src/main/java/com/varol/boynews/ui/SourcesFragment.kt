@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.varol.boynews.R
 import com.varol.boynews.base.BaseFragment
 import com.varol.boynews.databinding.FragmentSourcesListBinding
+import com.varol.boynews.extension.informToast
 import com.varol.boynews.viewmodel.NewsVM
+import observe
 
 class SourcesFragment : BaseFragment<NewsVM, FragmentSourcesListBinding>(NewsVM::class) {
     override val getLayoutId: Int = R.layout.fragment_sources_list
@@ -20,8 +22,29 @@ class SourcesFragment : BaseFragment<NewsVM, FragmentSourcesListBinding>(NewsVM:
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
 
+        subscribeSelectedSource()
+
         viewModel.getAllSources()
 
         return binding.root
+    }
+
+    /**
+     * Observing selectedSource LiveData
+     * If selected source is not null; call NewsFragment with source argument else inform with toast
+     */
+    private fun subscribeSelectedSource() {
+        viewModel.selectedSource.observe(this) { sourceModel ->
+            sourceModel?.id?.let {
+                loadFragment(
+                    R.id.container_main,
+                    NewsFragment.newInstance(it),
+                    fragmentManager,
+                    true
+                )
+            } ?: run {
+                informToast("Invalid News Source!")
+            }
+        }
     }
 }
