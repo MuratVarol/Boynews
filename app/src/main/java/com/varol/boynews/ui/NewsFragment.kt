@@ -64,7 +64,7 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
             activity?.onBackPressed()
         }
 
-        binding.ivBack?.setOnClickListener {
+        binding.tvBack?.setOnClickListener {
             activity?.onBackPressed()
         }
 
