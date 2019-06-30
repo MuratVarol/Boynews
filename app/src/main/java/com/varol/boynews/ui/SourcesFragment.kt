@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.varol.boynews.R
 import com.varol.boynews.base.BaseFragment
-import com.varol.boynews.databinding.FragmentNewsListBinding
+import com.varol.boynews.databinding.FragmentSourcesListBinding
 import com.varol.boynews.viewmodel.NewsVM
 
-class SourcesFragment  : BaseFragment<NewsVM,FragmentNewsListBinding>(NewsVM::class) {
+class SourcesFragment : BaseFragment<NewsVM, FragmentSourcesListBinding>(NewsVM::class) {
     override val getLayoutId: Int = R.layout.fragment_sources_list
 
 
