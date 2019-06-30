@@ -28,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/tv_news_source"
             style="@style/white_middle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +37,30 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Kaynaklar" />
+            tools:text="Al Jazeere" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/back_button_size"
+            android:layout_height="@dimen/back_button_size"
+            android:layout_margin="@dimen/margin_normal"
+            android:src="@drawable/ic_left_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/viewToolBar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_back"
+            style="@style/white_middle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:text="@{viewModel.selectedSource.name}"
+            app:layout_constraintBottom_toBottomOf="@+id/viewToolBar"
+            app:layout_constraintLeft_toRightOf="@+id/iv_back"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Geri" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_news"
@@ -45,9 +69,10 @@
             android:layout_marginStart="@dimen/margin_half"
             android:layout_marginEnd="@dimen/margin_half"
             android:layout_marginBottom="@dimen/margin_big"
+            app:dividerDrawableId="@{@drawable/line_horizontal}"
             app:itemClickListener="@{viewModel.newsClickListener}"
             app:itemLayoutId="@{@layout/item_news_list}"
-            app:itemList="@{viewModel.newsList}"
+            app:itemList="@{viewModel.newsViewEntityList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
