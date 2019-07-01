@@ -12,7 +12,17 @@ import com.varol.boynews.util.listener.ItemClickListener
 
 
 @BindingAdapter(
-    value = ["itemList", "itemLayoutId", "dividerEnabled", "itemClickListener", "dividerDrawableId", "dividerHorizontalDrawableId", "snapEnabled"],
+    value =
+    [
+        "itemList",
+        "itemLayoutId",
+        "dividerEnabled",
+        "itemClickListener",
+        "addToBookmarkListener",
+        "dividerDrawableId",
+        "dividerHorizontalDrawableId",
+        "snapEnabled"
+    ],
     requireAll = false
 )
 fun bindRecyclerView(
@@ -21,6 +31,7 @@ fun bindRecyclerView(
     itemLayoutId: Int,
     dividerEnabled: Boolean,
     itemClickListener: ItemClickListener<Nothing>?,
+    addToBookmarkListener: ItemClickListener<Nothing>,
     dividerDrawableId: Drawable?,
     dividerHorizontalDrawableId: Drawable?,
     snapEnabled: Boolean
@@ -29,7 +40,8 @@ fun bindRecyclerView(
     clearDecorations(recyclerView)
 
     if (recyclerView.adapter == null) {
-        val adapter = createAdapter(itemList, itemLayoutId, itemClickListener)
+        val adapter =
+            createAdapter(itemList, itemLayoutId, itemClickListener, addToBookmarkListener)
         setDefaultLayoutManager(recyclerView)
         recyclerView.adapter = adapter
     } else {
@@ -123,12 +135,14 @@ private fun clearDecorations(recyclerView: RecyclerView) {
 private fun createAdapter(
     modelList: List<Nothing>,
     layoutId: Int,
-    itemClickListener: ItemClickListener<Nothing>?
+    itemClickListener: ItemClickListener<Nothing>?,
+    addToBookmarkListener: ItemClickListener<Nothing>?
 )
         : BaseRecyclerAdapter<Nothing> {
     return AdapterBuilder(
         modelList,
         layoutId,
-        itemClickListener
+        itemClickListener,
+        addToBookmarkListener
     ).build()
 }

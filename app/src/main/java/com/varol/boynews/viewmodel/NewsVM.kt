@@ -3,14 +3,14 @@ package com.varol.boynews.viewmodel
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.varol.boynews.base.BaseVM
-import com.varol.boynews.models.SourceModel
 import com.varol.boynews.remote.DataHolder
 import com.varol.boynews.usecase.GetNewsUseCase
 import com.varol.boynews.usecase.GetSourcesUseCase
 import com.varol.boynews.usecase.NewsMappingUseCase
 import com.varol.boynews.util.binding_adapters.SingleLiveEvent
 import com.varol.boynews.util.listener.ItemClickListener
-import com.varol.boynews.view_entity.NewsViewEntity
+import com.varol.data.models.SourceModel
+import com.varol.data.view_entity.NewsViewEntity
 import java.util.concurrent.TimeUnit
 
 private const val REFRESH_TIMER = 60_000L
@@ -45,6 +45,15 @@ class NewsVM(
         override fun onItemClick(view: View, item: SourceModel, position: Int) {
 
             selectedSource.postValue(item)
+
+        }
+    }
+
+    val addToBookmarklickListener: ItemClickListener<NewsViewEntity> = object
+        : ItemClickListener<NewsViewEntity> {
+        override fun onItemClick(view: View, item: NewsViewEntity, position: Int) {
+
+            item
 
         }
     }
