@@ -1,10 +1,10 @@
 package com.varol.boynews.usecase
 
 import com.varol.boynews.base.BaseUseCase
-import com.varol.boynews.models.NewsModel
 import com.varol.boynews.remote.BaseNewsResponse
 import com.varol.boynews.remote.DataHolder
 import com.varol.boynews.remote.repository.NewsRepository
+import com.varol.data.models.NewsModel
 import io.reactivex.Single
 
 class GetNewsUseCase(

@@ -1,4 +1,4 @@
-package com.varol.boynews.view_entity
+package com.varol.data.view_entity
 
 /**
  * View entity for listing news
@@ -13,6 +13,6 @@ data class NewsViewEntity(
 
     val publishTime: String?,
 
-    val isAddedToReadList: Boolean = false
+    var isAddedToReadList: Boolean = false
 
 )

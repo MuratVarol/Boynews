@@ -1,4 +1,4 @@
-package com.varol.boynews.models
+package com.varol.data.models
 
 import com.google.gson.annotations.SerializedName
 

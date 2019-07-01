@@ -1,7 +1,7 @@
 package com.varol.boynews.remote
 
-import com.varol.boynews.models.NewsModel
-import com.varol.boynews.models.SourceModel
+import com.varol.data.models.NewsModel
+import com.varol.data.models.SourceModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
