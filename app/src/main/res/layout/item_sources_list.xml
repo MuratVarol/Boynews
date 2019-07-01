@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="com.varol.boynews.models.SourceModel" />
+            type="com.varol.data.models.SourceModel" />
 
     </data>
 
