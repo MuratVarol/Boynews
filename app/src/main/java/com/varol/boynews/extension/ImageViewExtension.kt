@@ -2,6 +2,7 @@ package com.varol.boynews.extension
 
 import android.widget.ImageView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.varol.boynews.R
 import com.varol.boynews.util.GlideApp
 
 fun ImageView.setImageByUrl(url: String?) {
@@ -17,6 +18,11 @@ fun ImageView.setImageByUrl(url: String?) {
         GlideApp.with(this.context)
             .load(url)
             .placeholder(circularProgressDrawable)
+            .error(R.drawable.ic_placeholder)
+            .into(this)
+    } else {
+        GlideApp.with(this.context)
+            .load(R.drawable.ic_placeholder)
             .into(this)
     }
 }
