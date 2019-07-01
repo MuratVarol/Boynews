@@ -10,5 +10,5 @@ inline fun <T> LiveData<T>.observe(owner: LifecycleOwner, crossinline observer: 
 operator fun <T> MutableLiveData<MutableList<T>>.plusAssign(values: MutableList<T>) {
     val value = this.value ?: mutableListOf()
     value.addAll(values)
-    this.postValue(value)
+    this.value = value
 }
