@@ -61,6 +61,10 @@ dependencies {
     implementation deps.retrofit.convertorGson
     implementation deps.retrofit.rxJavaAdapter
 
+    implementation deps.room.base
+    implementation deps.room.rxJava
+    kapt deps.room.compiler
+
     implementation deps.rx.java
     implementation deps.rx.android
 
