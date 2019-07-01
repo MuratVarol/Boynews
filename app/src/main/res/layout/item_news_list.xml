@@ -7,7 +7,7 @@
 
         <variable
             name="model"
-            type="com.varol.boynews.view_entity.NewsViewEntity" />
+            type="com.varol.boynews.data.view_entity.NewsViewEntity" />
 
     </data>
 
