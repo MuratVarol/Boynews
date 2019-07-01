@@ -24,4 +24,13 @@ class NewsRepository(private val api: Api) : BaseRepository() {
         )
     }
 
+    fun getSearchedNews(
+        apiKey: String,
+        searchedText: String
+    ): Single<DataHolder<BaseNewsResponse<MutableList<NewsModel>>>> {
+        return service.sendRequest(
+            api.getSearchedNews(apiKey, searchedText)
+        )
+    }
+
 }

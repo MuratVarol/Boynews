@@ -16,7 +16,7 @@ class NewsMappingUseCase(
      */
     fun newsModelToNewsViewEntity(
         newList: List<NewsModel>,
-        bookmarkList: List<Bookmarks>?
+        bookmarkList: List<Bookmarks>? = null
     ): MutableList<NewsViewEntity> {
 
         val newsViewEntityList = mutableListOf<NewsViewEntity>()

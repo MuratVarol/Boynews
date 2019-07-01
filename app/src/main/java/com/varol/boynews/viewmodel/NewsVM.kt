@@ -184,5 +184,39 @@ class NewsVM(
         disposables.add(disposable)
     }
 
+    fun getSearchedNews(searchText: String) {
+
+        isInProgress.postValue(true)
+
+        val disposable = getNewsUseCase
+            .getSearchedNews(searchText)
+            .observeOn(getBackgroundScheduler())
+            .subscribeOn(getBackgroundScheduler())
+            .subscribe({ data ->
+
+                when (data) {
+                    is DataHolder.Success -> {
+
+                        if (data.data.status == "ok") {
+                            newsViewEntityList.postValue(
+                                newsMappingUseCase.newsModelToNewsViewEntity(
+                                    data.data.articles
+                                )
+                            )
+                        }
+
+                    }
+                    is DataHolder.Error -> {
+                        errorMessage.postValue("Failed to download sources.")
+                    }
+                }
+                isInProgress.postValue(false)
+            }, {
+                isInProgress.postValue(false)
+                errorMessage.postValue(it.toString())
+            })
+        disposables.add(disposable)
+    }
+
 
 }

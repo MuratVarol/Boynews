@@ -18,4 +18,11 @@ class GetNewsUseCase(
             source
         )
     }
+
+    fun getSearchedNews(searchText: String): Single<DataHolder<BaseNewsResponse<MutableList<NewsModel>>>> {
+        return newsRepository.getSearchedNews(
+            apiKey,
+            searchText
+        )
+    }
 }

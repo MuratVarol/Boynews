@@ -20,4 +20,11 @@ interface Api {
     ): Single<BaseNewsResponse<MutableList<NewsModel>>>
 
 
+    @GET("v2/top-headlines")
+    fun getSearchedNews(
+        @Query(value = "apiKey") apiKey: String,
+        @Query(value = "q") searchText: String
+    ): Single<BaseNewsResponse<MutableList<NewsModel>>>
+
+
 }
