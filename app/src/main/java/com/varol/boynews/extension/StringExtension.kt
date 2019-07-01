@@ -9,12 +9,12 @@ import java.util.*
  * If invalid string given; current time will be return
  */
 @SuppressLint("SimpleDateFormat")
-fun String.toDate(format: String = "yyyy-MM-dd'T'HH:mm:ssZ"): Date {
+fun String.toDate(format: String = "yyyy-MM-dd'T'HH:mm:ss"): Date {
     val df = SimpleDateFormat(format)
 
 
     return try {
-        return df.parse(this)
+        df.parse(this)
     } catch (ex: Exception) {
         Calendar.getInstance().time
     }
@@ -23,7 +23,7 @@ fun String.toDate(format: String = "yyyy-MM-dd'T'HH:mm:ssZ"): Date {
 /**
  * Returns HOUR, MINUTE and SECOND of given time
  */
-fun String.getDayTime(format: String = "yyyy-MM-dd'T'HH:mm:ssZ"): String {
+fun String.getDayTime(format: String = "yyyy-MM-dd'T'HH:mm:ss"): String {
     val calendar = Calendar.getInstance()
     calendar.time = this.toDate(format)
 
