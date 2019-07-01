@@ -20,8 +20,7 @@ class NewsMappingUseCase(
                 urlAsId = newsModel.url,
                 title = newsModel.title,
                 imageUrl = newsModel.urlToImage,
-                publishTime = parseDate(newsModel.publishedAt),
-                isAddedToReadList = isAddedToReadList(newsModel.url)
+                publishTime = parseDate(newsModel.publishedAt)
             )
 
             newsViewEntityList.add(newsViewEntity)
