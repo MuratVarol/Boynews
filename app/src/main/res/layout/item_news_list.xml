@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_normal"
             android:layout_marginTop="@dimen/margin_half"
-            android:text="@{model.addedToReadList ? @string/add_to_read_list : @string/remove_from_read_list}"
+            android:text="@{model.addedToReadList ? @string/remove_from_read_list : @string/add_to_read_list}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title"
             tools:text="@string/add_to_read_list" />
