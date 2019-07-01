@@ -3,9 +3,11 @@ package com.varol.boynews.viewmodel
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.varol.boynews.base.BaseVM
+import com.varol.boynews.data.models.NewsModel
 import com.varol.boynews.data.models.SourceModel
 import com.varol.boynews.data.view_entity.NewsViewEntity
 import com.varol.boynews.remote.DataHolder
+import com.varol.boynews.usecase.BookmarkUseCase
 import com.varol.boynews.usecase.GetNewsUseCase
 import com.varol.boynews.usecase.GetSourcesUseCase
 import com.varol.boynews.usecase.NewsMappingUseCase
@@ -18,7 +20,8 @@ private const val REFRESH_TIMER = 60_000L
 class NewsVM(
     private val getNewsUseCase: GetNewsUseCase,
     private val getSourcesUseCase: GetSourcesUseCase,
-    private val newsMappingUseCase: NewsMappingUseCase
+    private val newsMappingUseCase: NewsMappingUseCase,
+    private val bookmarkUseCase: BookmarkUseCase
 
 ) : BaseVM() {
 
@@ -49,12 +52,17 @@ class NewsVM(
         }
     }
 
-    val addToBookmarklickListener: ItemClickListener<NewsViewEntity> = object
+    val addToBookmarkClickListener: ItemClickListener<NewsViewEntity> = object
         : ItemClickListener<NewsViewEntity> {
         override fun onItemClick(view: View, item: NewsViewEntity, position: Int) {
 
-            item
-
+            item.urlAsId?.let {
+                if (item.isAddedToReadList) {
+                    bookmarkUseCase.addBookmark(it)
+                } else {
+                    bookmarkUseCase.deleteBookmark(it)
+                }
+            }
         }
     }
 
@@ -107,6 +115,18 @@ class NewsVM(
         disposables.add(disposable)
     }
 
+    fun getBookmarks(newsList: List<NewsModel>) {
+        val disposable = bookmarkUseCase
+            .getAllBookmarks()
+            .subscribe { bookmarks ->
+                newsViewEntityList.postValue(
+                    newsMappingUseCase.newsModelToNewsViewEntity(
+                        newsList, bookmarks
+                    )
+                )
+            }
+        disposables.add(disposable)
+    }
 
     fun getAllNews(selectedSource: String) {
 
@@ -122,11 +142,7 @@ class NewsVM(
                     is DataHolder.Success -> {
 
                         if (data.data.status == "ok") {
-                            newsViewEntityList.postValue(
-                                newsMappingUseCase.newsModelToNewsViewEntity(
-                                    data.data.articles
-                                )
-                            )
+                            getBookmarks(data.data.articles)
                         }
 
                     }
@@ -141,4 +157,6 @@ class NewsVM(
             })
         disposables.add(disposable)
     }
+
+
 }

@@ -26,6 +26,7 @@ fun createAppDatabase(context: Context): AppDatabase {
             APP_DATABASE_NAME
         )
         .fallbackToDestructiveMigration()
+        .allowMainThreadQueries()
         .build()
 }
 
