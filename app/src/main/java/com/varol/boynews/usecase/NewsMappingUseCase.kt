@@ -4,6 +4,7 @@ import com.varol.boynews.base.BaseUseCase
 import com.varol.boynews.data.models.Bookmarks
 import com.varol.boynews.data.models.NewsModel
 import com.varol.boynews.data.view_entity.NewsViewEntity
+import com.varol.boynews.extension.dateToTimeStamp
 import com.varol.boynews.extension.getDayTime
 
 
@@ -26,6 +27,7 @@ class NewsMappingUseCase(
                 title = newsModel.title,
                 imageUrl = newsModel.urlToImage,
                 publishTime = parseDate(newsModel.publishedAt),
+                timeStamp = newsModel.publishedAt?.dateToTimeStamp(),
                 isAddedToReadList = isAddedToReadList(newsModel.url, bookmarkList)
             )
 

@@ -27,8 +27,16 @@ fun String.getDayTime(format: String = "yyyy-MM-dd'T'HH:mm:ss"): String {
     val calendar = Calendar.getInstance()
     calendar.time = this.toDate(format)
 
-    return "${calendar.get(Calendar.HOUR)} : " +
-            "${calendar.get(Calendar.MINUTE)} : " +
-            "${calendar.get(Calendar.SECOND)} "
+    return "${String.format("%02d", calendar.get(Calendar.HOUR))} : " +
+            "${String.format("%02d", calendar.get(Calendar.MINUTE))} : " +
+            "${String.format("%02d", calendar.get(Calendar.SECOND))} "
+}
 
+fun String.dateToTimeStamp(format: String = "yyyy-MM-dd'T'HH:mm:ss"): Long? {
+
+    return try {
+        this.toDate(format).time
+    } catch (e: java.lang.Exception) {
+        null
+    }
 }

@@ -13,6 +13,8 @@ data class NewsViewEntity(
 
     val publishTime: String?,
 
+    val timeStamp: Long?,
+
     var isAddedToReadList: Boolean = false
 
 )

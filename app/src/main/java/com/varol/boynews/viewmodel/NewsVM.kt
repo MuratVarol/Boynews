@@ -13,7 +13,10 @@ import com.varol.boynews.usecase.GetSourcesUseCase
 import com.varol.boynews.usecase.NewsMappingUseCase
 import com.varol.boynews.util.binding_adapters.SingleLiveEvent
 import com.varol.boynews.util.listener.ItemClickListener
+import io.reactivex.Observable
+import plusAssign
 import java.util.concurrent.TimeUnit
+
 
 private const val REFRESH_TIMER = 60_000L
 
@@ -115,11 +118,11 @@ class NewsVM(
         disposables.add(disposable)
     }
 
-    fun getBookmarks(newsList: List<NewsModel>) {
+    private fun getBookmarks(newsList: List<NewsModel>) {
         val disposable = bookmarkUseCase
             .getAllBookmarks()
             .subscribe { bookmarks ->
-                newsViewEntityList.postValue(
+                addUniqueNewsToList(
                     newsMappingUseCase.newsModelToNewsViewEntity(
                         newsList, bookmarks
                     )
@@ -128,7 +131,30 @@ class NewsVM(
         disposables.add(disposable)
     }
 
-    fun getAllNews(selectedSource: String) {
+    /**
+     * Add new news list if not contains in showing list
+     * This approach cost less than DiffUtil class
+     */
+    private fun addUniqueNewsToList(newsList: List<NewsViewEntity>) {
+
+        //Firstly sort newList with timestamp(higher first for latest to oldest news)
+        newsList.sortedByDescending { it.timeStamp }
+
+        //Add if list empty or list doesn't have the current NewsViewEntity
+        val disposable = Observable.fromIterable(newsList)
+            .subscribeOn(getBackgroundScheduler())
+            .observeOn(getMainThreadScheduler())
+            .subscribe { item ->
+                if (newsViewEntityList.value == null || newsViewEntityList.value?.contains(item) == false) {
+                    newsViewEntityList += mutableListOf(item)
+                }
+            }
+
+        disposables.add(disposable)
+
+    }
+
+    private fun getAllNews(selectedSource: String) {
 
         isInProgress.postValue(true)
 
