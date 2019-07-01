@@ -1,6 +1,7 @@
 package com.varol.boynews.usecase
 
 import com.varol.boynews.base.BaseUseCase
+import com.varol.boynews.extension.getDayTime
 import com.varol.boynews.models.NewsModel
 import com.varol.boynews.view_entity.NewsViewEntity
 
@@ -29,9 +30,7 @@ class NewsMappingUseCase(
     }
 
     private fun parseDate(date: String?): String {
-
-
-        return ""
+        return date?.getDayTime() ?: ""
     }
 
     private fun isAddedToReadList(urlAsId: String?): Boolean {
