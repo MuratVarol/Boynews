@@ -48,6 +48,7 @@
             app:itemClickListener="@{viewModel.sourceClickListener}"
             app:itemLayoutId="@{@layout/item_sources_list}"
             app:itemList="@{viewModel.sourcesList}"
+            app:addToBookmarkListener="@{viewModel.addToBookmarklickListener}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

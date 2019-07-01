@@ -75,6 +75,7 @@
             android:layout_marginBottom="@dimen/margin_big"
             app:dividerDrawableId="@{@drawable/line_horizontal}"
             app:itemClickListener="@{viewModel.newsClickListener}"
+            app:addToBookmarkListener="@{viewModel.addToBookmarklickListener}"
             app:itemLayoutId="@{@layout/item_news_list}"
             app:itemList="@{viewModel.newsViewEntityList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
