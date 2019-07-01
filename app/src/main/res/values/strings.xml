@@ -5,6 +5,7 @@
 
     <string name="add_to_read_list">Okuma listesine ekle</string>
     <string name="remove_from_read_list">Okuma listesinden çıkar</string>
+    <string name="sources">Kaynaklar</string>
 
 
 </resources>
