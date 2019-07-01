@@ -53,6 +53,18 @@
             tools:text="14:22:00"
             />
 
+        <TextView
+            android:id="@+id/tv_add_to_list"
+            style="@style/small_blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_half"
+            android:text="@{model.addedToReadList ? @string/add_to_read_list : @string/remove_from_read_list}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="@string/add_to_read_list" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
