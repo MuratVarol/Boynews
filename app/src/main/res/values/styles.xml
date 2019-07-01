@@ -33,4 +33,14 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="edt_base">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="edt_search" parent="edt_base">
+        <item name="android:textSize">@dimen/app_bar_text</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
