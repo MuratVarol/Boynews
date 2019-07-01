@@ -39,10 +39,15 @@ class BaseRecyclerAdapter<ModelType>(
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         val model = modelList[position]
+        /**
+         * Adding to bookmark ability killed the generic structure of Adapter
+         * Below code is workaround for add to bookmark ability
+         * TODO: turn back here and move below job to independent class
+         */
         if (model is NewsViewEntity) {
             holder.itemBinding.root.tv_add_to_list?.setOnClickListener { view ->
-                addToBookmarkListener?.onItemClick(view, model, position)
                 model.isAddedToReadList = model.isAddedToReadList.not()
+                addToBookmarkListener?.onItemClick(view, model, position)
                 notifyItemChanged(position)
             }
         }
