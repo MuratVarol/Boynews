@@ -25,7 +25,7 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
 
         /**
          * Creates instance of NewsFragment with added source id bundle
-         * @param id : Source id
+         * @param sourceModel : Source Model
          * @return NewFragment
          */
         fun newInstance(sourceModel: SourceModel): NewsFragment {

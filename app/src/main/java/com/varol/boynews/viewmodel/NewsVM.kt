@@ -3,7 +3,6 @@ package com.varol.boynews.viewmodel
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.varol.boynews.base.BaseVM
-import com.varol.boynews.models.NewsModel
 import com.varol.boynews.models.SourceModel
 import com.varol.boynews.remote.DataHolder
 import com.varol.boynews.usecase.GetNewsUseCase
@@ -25,7 +24,6 @@ class NewsVM(
 
     val isInProgress = SingleLiveEvent<Boolean>()
 
-    val newsList = MutableLiveData<MutableList<NewsModel>>()
     val sourcesList = MutableLiveData<MutableList<SourceModel>>()
     val selectedNews = SingleLiveEvent<NewsViewEntity>()
     val selectedSource = SingleLiveEvent<SourceModel>()
