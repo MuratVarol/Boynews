@@ -23,6 +23,10 @@
         <item name="android:textSize">@dimen/description_text_size</item>
     </style>
 
+    <style name="small_blue" parent="small_black">
+        <item name="android:textColor">@android:color/holo_blue_dark</item>
+    </style>
+
     <style name="white_middle" parent="tv_base">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/app_bar_text</item>
