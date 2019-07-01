@@ -68,6 +68,9 @@ dependencies {
     implementation deps.rx.java
     implementation deps.rx.android
 
+    implementation deps.rxBinding.platform
+    implementation deps.rxBinding.kotlin
+
     implementation deps.glide.main
     kapt deps.glide.compiler
 
