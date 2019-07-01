@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.varol.boynews.R
 import com.varol.boynews.base.BaseFragment
 import com.varol.boynews.data.models.SourceModel
@@ -13,6 +14,7 @@ import com.varol.boynews.databinding.FragmentNewsListBinding
 import com.varol.boynews.extension.informToast
 import com.varol.boynews.viewmodel.NewsVM
 import observe
+import java.util.concurrent.TimeUnit
 
 
 class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class) {
@@ -36,6 +38,17 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
             return fragment
         }
 
+        /**
+         * Creates instance of NewsFragment with search ability
+         * @return NewFragment
+         */
+        fun newInstance(): NewsFragment {
+            return NewsFragment()
+        }
+
+
+
+
     }
 
     override fun onCreateView(
@@ -55,11 +68,20 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
             }
 
         } ?: run {
-            informToast("Invalid News Source!")
+            binding.edtSearch.visibility = View.VISIBLE
         }
 
         subscribeSelectedNews()
 
+        setViewListeners()
+
+
+
+
+        return binding.root
+    }
+
+    private fun setViewListeners() {
         binding.ivBack?.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -68,7 +90,15 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
             activity?.onBackPressed()
         }
 
-        return binding.root
+        val observableSearch = RxTextView.textChanges(binding.edtSearch)
+            .filter { chars -> chars.length >= 3 }
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .map { chars -> chars.toString() }
+            .subscribe {
+                viewModel.getSearchedNews(it.toString())
+            }
+
+
     }
 
     private fun subscribeSelectedNews() {
