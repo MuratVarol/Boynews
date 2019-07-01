@@ -1,4 +1,4 @@
-package com.varol.data.models
+package com.varol.boynews.data.models
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

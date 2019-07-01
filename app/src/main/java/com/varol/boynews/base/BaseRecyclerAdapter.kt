@@ -7,9 +7,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.varol.boynews.BR
 import com.varol.boynews.R
+import com.varol.boynews.data.models.SourceModel
+import com.varol.boynews.data.view_entity.NewsViewEntity
 import com.varol.boynews.util.listener.ItemClickListener
-import com.varol.data.models.SourceModel
-import com.varol.data.view_entity.NewsViewEntity
 import kotlinx.android.synthetic.main.item_news_list.view.*
 
 class BaseRecyclerAdapter<ModelType>(

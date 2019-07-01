@@ -1,4 +1,4 @@
-package com.varol.data.view_entity
+package com.varol.boynews.data.view_entity
 
 /**
  * View entity for listing news

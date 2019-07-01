@@ -3,14 +3,14 @@ package com.varol.boynews.viewmodel
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.varol.boynews.base.BaseVM
+import com.varol.boynews.data.models.SourceModel
+import com.varol.boynews.data.view_entity.NewsViewEntity
 import com.varol.boynews.remote.DataHolder
 import com.varol.boynews.usecase.GetNewsUseCase
 import com.varol.boynews.usecase.GetSourcesUseCase
 import com.varol.boynews.usecase.NewsMappingUseCase
 import com.varol.boynews.util.binding_adapters.SingleLiveEvent
 import com.varol.boynews.util.listener.ItemClickListener
-import com.varol.data.models.SourceModel
-import com.varol.data.view_entity.NewsViewEntity
 import java.util.concurrent.TimeUnit
 
 private const val REFRESH_TIMER = 60_000L

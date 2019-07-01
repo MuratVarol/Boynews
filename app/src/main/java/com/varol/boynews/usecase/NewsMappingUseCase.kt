@@ -1,9 +1,9 @@
 package com.varol.boynews.usecase
 
 import com.varol.boynews.base.BaseUseCase
+import com.varol.boynews.data.models.NewsModel
+import com.varol.boynews.data.view_entity.NewsViewEntity
 import com.varol.boynews.extension.getDayTime
-import com.varol.data.models.NewsModel
-import com.varol.data.view_entity.NewsViewEntity
 
 
 class NewsMappingUseCase(

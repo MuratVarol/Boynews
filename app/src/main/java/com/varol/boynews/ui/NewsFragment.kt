@@ -8,10 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.varol.boynews.R
 import com.varol.boynews.base.BaseFragment
+import com.varol.boynews.data.models.SourceModel
 import com.varol.boynews.databinding.FragmentNewsListBinding
 import com.varol.boynews.extension.informToast
 import com.varol.boynews.viewmodel.NewsVM
-import com.varol.data.models.SourceModel
 import observe
 
 
