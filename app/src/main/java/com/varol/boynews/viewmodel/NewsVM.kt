@@ -194,15 +194,14 @@ class NewsVM(
             .subscribeOn(getBackgroundScheduler())
             .subscribe({ data ->
 
+                //clear newsViewEntityList each time api query
+                newsViewEntityList.postValue(mutableListOf())
+
                 when (data) {
                     is DataHolder.Success -> {
 
                         if (data.data.status == "ok") {
-                            newsViewEntityList.postValue(
-                                newsMappingUseCase.newsModelToNewsViewEntity(
-                                    data.data.articles
-                                )
-                            )
+                            getBookmarks(data.data.articles)
                         }
 
                     }
