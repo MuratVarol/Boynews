@@ -26,6 +26,15 @@ class SourcesFragment : BaseFragment<NewsVM, FragmentSourcesListBinding>(NewsVM:
 
         viewModel.getAllSources()
 
+        binding.ivSearch.setOnClickListener {
+            loadFragment(
+                R.id.container_main,
+                NewsFragment.newInstance(),
+                fragmentManager,
+                true
+            )
+        }
+
         return binding.root
     }
 
