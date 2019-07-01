@@ -9,8 +9,12 @@ import com.varol.boynews.remote.DataHolder
 import com.varol.boynews.usecase.GetNewsUseCase
 import com.varol.boynews.usecase.GetSourcesUseCase
 import com.varol.boynews.usecase.NewsMappingUseCase
+import com.varol.boynews.util.binding_adapters.SingleLiveEvent
 import com.varol.boynews.util.listener.ItemClickListener
 import com.varol.boynews.view_entity.NewsViewEntity
+import java.util.concurrent.TimeUnit
+
+private const val REFRESH_TIMER = 60_000L
 
 class NewsVM(
     private val getNewsUseCase: GetNewsUseCase,
@@ -19,10 +23,12 @@ class NewsVM(
 
 ) : BaseVM() {
 
+    val isInProgress = SingleLiveEvent<Boolean>()
+
     val newsList = MutableLiveData<MutableList<NewsModel>>()
     val sourcesList = MutableLiveData<MutableList<SourceModel>>()
-    val selectedNews = MutableLiveData<NewsViewEntity>()
-    val selectedSource = MutableLiveData<SourceModel>()
+    val selectedNews = SingleLiveEvent<NewsViewEntity>()
+    val selectedSource = SingleLiveEvent<SourceModel>()
 
     val newsViewEntityList = MutableLiveData<MutableList<NewsViewEntity>>()
 
@@ -47,6 +53,9 @@ class NewsVM(
 
 
     fun getAllSources() {
+
+        isInProgress.postValue(true)
+
         val disposable = getSourcesUseCase
             .getSources()
             .observeOn(getBackgroundScheduler())
@@ -65,14 +74,37 @@ class NewsVM(
                         errorMessage.postValue("Failed to download sources.")
                     }
                 }
+
+                isInProgress.postValue(false)
+
             }, {
+                isInProgress.postValue(false)
                 errorMessage.postValue(it.toString())
             })
         disposables.add(disposable)
     }
 
+    /**
+     * Download News periodically
+     */
+    fun getNewsPeriodically(selectedSource: String) {
+
+        //First shot
+        getAllNews(selectedSource)
+
+        //Calls getAllNews() method every REFRESH_TIMER time
+        val disposable = startCountdown(REFRESH_TIMER, TimeUnit.MILLISECONDS)
+            .subscribe {
+                getAllNews(selectedSource)
+            }
+        disposables.add(disposable)
+    }
+
 
     fun getAllNews(selectedSource: String) {
+
+        isInProgress.postValue(true)
+
         val disposable = getNewsUseCase
             .getNews(selectedSource)
             .observeOn(getBackgroundScheduler())
@@ -95,7 +127,9 @@ class NewsVM(
                         errorMessage.postValue("Failed to download sources.")
                     }
                 }
+                isInProgress.postValue(false)
             }, {
+                isInProgress.postValue(false)
                 errorMessage.postValue(it.toString())
             })
         disposables.add(disposable)

@@ -51,7 +51,7 @@ class NewsFragment : BaseFragment<NewsVM, FragmentNewsListBinding>(NewsVM::class
             viewModel.selectedSource.postValue(sourceModel)
 
             sourceModel.id?.let { sourceId ->
-                viewModel.getAllNews(sourceId)
+                viewModel.getNewsPeriodically(sourceId)
             }
 
         } ?: run {
